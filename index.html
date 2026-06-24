@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maré Restaurant — QR Menü</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D2137;
+  --navy-light:#162d45;
+  --sand:#F5E6C8;
+  --sand-light:#FDF6EA;
+  --coral:#E8603C;
+  --coral-light:rgba(232,96,60,0.12);
+  --gold:#C9A84C;
+  --gold-light:rgba(201,168,76,0.15);
+  --white:#FAFAF8;
+  --text-dark:#1a1a1a;
+  --text-mid:#4a4a4a;
+  --text-muted:#7a7a7a;
+  --border:#e8e0d0;
+  --green:#2d7a3e;
+  --green-light:#e8f5ec;
+}
+body{
+  background:var(--sand-light);
+  font-family:'Inter',sans-serif;
+  color:var(--text-dark);
+  min-height:100vh;
+}
+
+/* ─── HEADER ─── */
+header{
+  background:var(--navy);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 24px 12px;
+  border-bottom:1px solid rgba(201,168,76,0.25);
+}
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-emblem{
+  width:44px;height:44px;
+  background:var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:600;
+  color:var(--navy);
+  flex-shrink:0;
+}
+.logo-text{
+  display:flex;flex-direction:column;
+  line-height:1.1;
+}
+.logo-name{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:600;
+  color:var(--white);
+  letter-spacing:0.03em;
+}
+.logo-sub{
+  font-size:10px;font-weight:300;
+  color:var(--gold);
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-top:3px;
+}
+.lang-btn{
+  background:transparent;
+  border:1px solid rgba(201,168,76,0.5);
+  color:var(--gold);
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:500;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:all 0.2s;
+  letter-spacing:0.05em;
+  display:flex;align-items:center;gap:7px;
+  white-space:nowrap;
+}
+.lang-btn:hover{
+  background:var(--gold);
+  color:var(--navy);
+}
+.lang-btn .flag{font-size:15px}
+
+/* ─── HERO ─── */
+.hero{
+  background:linear-gradient(150deg,var(--navy) 0%,#1a3a5c 100%);
+  padding:22px 24px 0;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:32px;
+  background:var(--sand-light);
+  clip-path:ellipse(55% 100% at 50% 100%);
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:400;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:7px;
+}
+.hero-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-style:italic;
+  color:var(--white);
+  line-height:1.35;
+  margin-bottom:20px;
+}
+.wave-divider{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  padding-bottom:40px;
+}
+.wave-divider span{
+  display:inline-block;
+  height:1px;
+  background:var(--gold);
+  opacity:0.6;
+}
+.wave-divider span:nth-child(1){width:20px}
+.wave-divider span:nth-child(2){width:40px;opacity:1}
+.wave-divider span:nth-child(3){width:20px}
+
+/* ─── CATEGORY NAV ─── */
+.cat-nav{
+  display:flex;
+  gap:8px;
+  padding:14px 20px 12px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  background:var(--sand-light);
+  border-bottom:1px solid var(--border);
+}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-btn{
+  flex-shrink:0;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text-mid);
+  font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:9px 20px;
+  border-radius:24px;
+  cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.cat-btn.active{
+  background:var(--navy);
+  border-color:var(--navy);
+  color:var(--white);
+}
+.cat-btn:hover:not(.active){
+  background:var(--gold-light);
+  border-color:var(--gold);
+}
+.cat-icon{font-size:15px}
+
+/* ─── SECTION HEADER ─── */
+.section-header{
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  padding:26px 20px 14px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:600;
+  color:var(--navy);
+  line-height:1;
+  white-space:nowrap;
+}
+.section-line{
+  flex:1;
+  height:1px;
+  background:linear-gradient(to right,var(--gold) 0%,transparent 100%);
+  margin-bottom:5px;
+}
+
+/* ─── MENU GRID ─── */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+  padding:0 16px 24px;
+}
+
+/* ─── CARD ─── */
+.menu-card{
+  background:var(--white);
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;
+}
+.menu-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(13,33,55,0.12);
+}
+.card-img-wrap{
+  position:relative;
+  height:164px;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--sand) 0%,#e0ceaa 100%);
+}
+.card-img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:58px;
+}
+.card-img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.badge-popular{
+  position:absolute;top:10px;right:10px;
+  background:var(--coral);
+  color:#fff;
+  font-size:10px;font-weight:600;
+  letter-spacing:0.08em;
+  padding:4px 11px;border-radius:12px;
+  text-transform:uppercase;
+}
+.badge-veggie{
+  position:absolute;top:10px;left:10px;
+  background:var(--green);
+  color:#fff;
+  font-size:10px;font-weight:600;
+  padding:4px 11px;border-radius:12px;
+}
+.card-body{padding:15px 17px}
+.card-name{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:600;
+  color:var(--navy);
+  line-height:1.2;margin-bottom:2px;
+}
+.card-name-alt{
+  font-size:11px;font-weight:400;
+  color:var(--text-muted);
+  font-style:italic;
+  font-family:'Playfair Display',serif;
+  margin-bottom:7px;
+}
+.card-desc{
+  font-size:12.5px;
+  color:var(--text-mid);
+  line-height:1.55;
+  margin-bottom:12px;
+}
+.card-footer{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-top:11px;
+  border-top:1px solid var(--border);
+  gap:8px;
+}
+.price-block{display:flex;flex-direction:column;gap:1px}
+.price-primary{
+  font-size:20px;font-weight:600;
+  color:var(--navy);
+}
+.price-secondary{
+  font-size:12px;color:var(--text-muted);font-weight:400;
+}
+.allergen-wrap{text-align:right}
+.allergen-label{
+  font-size:10px;font-weight:500;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.allergen-tags{
+  display:flex;flex-wrap:wrap;
+  gap:3px;justify-content:flex-end;
+  max-width:140px;
+}
+.allergen-tag{
+  font-size:10px;
+  background:var(--coral-light);
+  color:#7a2510;
+  padding:2px 8px;border-radius:8px;font-weight:500;
+}
+.no-allergen{
+  font-size:11px;
+  background:var(--green-light);
+  color:var(--green);
+  padding:3px 9px;border-radius:8px;font-weight:500;
+}
+
+/* ─── SECTIONS ─── */
+.menu-section{display:none}
+.menu-section.visible{display:block}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--navy);
+  color:rgba(255,255,255,0.45);
+  text-align:center;
+  padding:22px 20px;
+  font-size:11px;letter-spacing:0.05em;
+  margin-top:8px;
+  line-height:1.8;
+}
+footer .gold{
+  color:var(--gold);
+  font-family:'Playfair Display',serif;
+  font-size:13px;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header>
+  <div class="header-top">
+    <div class="logo-area">
+      <div class="logo-emblem">M</div>
+      <div class="logo-text">
+        <span class="logo-name">Maré</span>
+        <span class="logo-sub">Mediterranean &amp; Seafood</span>
+      </div>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">
+      <span class="flag" id="flagIcon">🇬🇧</span>
+      <span id="langLabel">EN / €</span>
+    </button>
+  </div>
+
+  <div class="hero">
+    <p class="hero-eyebrow" id="heroEye">Antalya Körfezi'nden Sofraya</p>
+    <h1 class="hero-tagline" id="heroTag">"Denizin tuzlu nefesiyle hazırlanan lezzetler"</h1>
+    <div class="wave-divider">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <nav class="cat-nav">
+    <button class="cat-btn active" onclick="showCat('starters',this)">
+      <span class="cat-icon">🐚</span><span id="c1">Başlangıçlar</span>
+    </button>
+    <button class="cat-btn" onclick="showCat('mains',this)">
+      <span class="cat-icon">🐟</span><span id="c2">Ana Yemekler</span>
+    </button>
+    <button class="cat-btn" onclick="showCat('drinks',this)">
+      <span class="cat-icon">🍋</span><span id="c3">İçecekler</span>
+    </button>
+  </nav>
+</header>
+
+<!-- ════════════════ STARTERS ════════════════ -->
+<section class="menu-section visible" id="sec-starters">
+  <div class="section-header">
+    <h2 class="section-title" id="st">Başlangıçlar</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid" id="grid-starters"></div>
+</section>
+
+<!-- ════════════════ MAINS ════════════════ -->
+<section class="menu-section" id="sec-mains">
+  <div class="section-header">
+    <h2 class="section-title" id="mn">Ana Yemekler</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid" id="grid-mains"></div>
+</section>
+
+<!-- ════════════════ DRINKS ════════════════ -->
+<section class="menu-section" id="sec-drinks">
+  <div class="section-header">
+    <h2 class="section-title" id="dr">İçecekler</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="menu-grid" id="grid-drinks"></div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <p class="gold">Maré Restaurant</p>
+  <p>Kaleiçi, Antalya &nbsp;·&nbsp; +90 242 000 00 00 &nbsp;·&nbsp; info@marerestaurant.com</p>
+  <p style="margin-top:6px">Tüm ürünler günlük taze temin edilmektedir. Alerjenler hakkında personelimize danışınız.</p>
+</footer>
+
+<!-- ════════════════ JAVASCRIPT ════════════════ -->
+<script>
+/* ── Döviz kuru (1 EUR = kaç TL) ── */
+const EUR_RATE = 38.5;
+let isEN = false;
+
+/* ── Menü verisi ── */
+const menu = {
+  starters: [
+    {
+      tr: "Ahtapot Salatası", en: "Octopus Salad",
+      descTR: "Izgara ahtapot, taze maydanoz, zeytinyağı ve limonla hazırlanan Akdeniz klasiği.",
+      descEN: "Grilled octopus with fresh parsley, extra virgin olive oil and a squeeze of lemon.",
+      priceTL: 220, emoji: "🐙",
+      allergens: ["Mollusks / Yumuşakçalar"],
+      popular: true, veggie: false
+    },
+    {
+      tr: "Tarama", en: "Tarama Dip",
+      descTR: "Geleneksel balık yumurtası ezmesi, gevrek pide eşliğinde.",
+      descEN: "Traditional cured fish roe spread served with crispy flatbread.",
+      priceTL: 160, emoji: "🥣",
+      allergens: ["Gluten", "Fish / Balık", "Eggs / Yumurta"],
+      popular: false, veggie: false
+    },
+    {
+      tr: "Barbun Tava", en: "Pan-Fried Red Mullet",
+      descTR: "Hafif un kaplama taze barbun fileto, sarımsaklı yoğurt soslu.",
+      descEN: "Lightly floured fresh mullet fillets with garlic yoghurt sauce.",
+      priceTL: 195, emoji: "🐠",
+      allergens: ["Gluten", "Fish / Balık", "Milk / Süt"],
+      popular: false, veggie: false
+    },
+    {
+      tr: "Zeytinyağlı Enginar", en: "Artichoke in Olive Oil",
+      descTR: "Klasik Ege usulü pişirilmiş enginar, dereotu ve limon ile.",
+      descEN: "Classic Aegean braised artichoke hearts with dill and lemon.",
+      priceTL: 145, emoji: "🌿",
+      allergens: [],
+      popular: false, veggie: true
+    },
+    {
+      tr: "Midye Dolma", en: "Stuffed Mussels",
+      descTR: "Zeytinyağlı pilavla doldurulmuş taze midye, limon ile servis edilir.",
+      descEN: "Fresh mussels stuffed with saffron-scented olive oil rice, served with lemon.",
+      priceTL: 180, emoji: "🦪",
+      allergens: ["Mollusks / Yumuşakçalar", "Gluten"],
+      popular: true, veggie: false
+    },
+    {
+      tr: "Karides Güveç", en: "Prawn Casserole",
+      descTR: "Domates sosu, kaşar peyniri ve karidesden oluşan fırın güveç.",
+      descEN: "Oven casserole of tiger prawns in tomato sauce with melted kaşar cheese.",
+      priceTL: 245, emoji: "🦐",
+      allergens: ["Crustaceans / Kabuklu", "Milk / Süt"],
+      popular: true, veggie: false
+    }
+  ],
+  mains: [
+    {
+      tr: "Levrek Izgara", en: "Grilled Sea Bass",
+      descTR: "Günlük taze levrek fileto, ızgara sebze ve roka salatası ile.",
+      descEN: "Freshly caught sea bass fillet with grilled vegetables and rocket salad.",
+      priceTL: 420, emoji: "🐡",
+      allergens: ["Fish / Balık"],
+      popular: true, veggie: false
+    },
+    {
+      tr: "Kalamar Tava", en: "Fried Calamari",
+      descTR: "Crispy kaplama kalamar halkalar, tartar sos eşliğinde.",
+      descEN: "Crispy battered calamari rings with house tartar sauce.",
+      priceTL: 285, emoji: "🦑",
+      allergens: ["Gluten", "Mollusks / Yumuşakçalar", "Eggs / Yumurta", "Mustard / Hardal"],
+      popular: true, veggie: false
+    },
+    {
+      tr: "Çipura Fırın", en: "Baked Sea Bream",
+      descTR: "Tuz kabuğunda pişirilmiş bütün çipura, kapari ve zeytinyağıyla.",
+      descEN: "Whole sea bream baked in a salt crust, finished with capers and olive oil.",
+      priceTL: 390, emoji: "🐟",
+      allergens: ["Fish / Balık"],
+      popular: false, veggie: false
+    },
+    {
+      tr: "Karidesli Linguine", en: "Seafood Linguine",
+      descTR: "Karides ve taze deniz ürünlü linguine, sarımsak-limon sosu.",
+      descEN: "Linguine tossed with prawns and mixed seafood in garlic-lemon sauce.",
+      priceTL: 310, emoji: "🍝",
+      allergens: ["Gluten", "Crustaceans / Kabuklu", "Mollusks / Yumuşakçalar"],
+      popular: false, veggie: false
+    },
+    {
+      tr: "Akdeniz Sebze Güveç", en: "Mediterranean Vegetable Stew",
+      descTR: "Kabak, patlıcan, biber ve domatesten oluşan zeytinyağlı güveç.",
+      descEN: "Hearty stew of courgettes, aubergine, peppers and tomatoes in olive oil.",
+      priceTL: 210, emoji: "🫕",
+      allergens: [],
+      popular: false, veggie: true
+    },
+    {
+      tr: "Orfoz Fileto", en: "Grouper Steak",
+      descTR: "Şefin özel soslu orfoz balığı filetosu, kapari yağı ve taze otlar.",
+      descEN: "Chef's signature grouper fillet with caper butter and fresh herbs.",
+      priceTL: 520, emoji: "🍽️",
+      allergens: ["Fish / Balık", "Milk / Süt"],
+      popular: true, veggie: false
+    }
+  ],
+  drinks: [
+    {
+      tr: "Taze Limonata", en: "Fresh Lemonade",
+      descTR: "Günlük sıkma limon, nane ve az şekerle hazırlanmış ev yapımı limonata.",
+      descEN: "House-made lemonade with freshly squeezed lemons and garden mint.",
+      priceTL: 95, emoji: "🍋",
+      allergens: [],
+      popular: true, veggie: true
+    },
+    {
+      tr: "Türk Çayı", en: "Turkish Tea",
+      descTR: "Karadeniz'in geleneksel dökme çayı, ince belli bardakta servis edilir.",
+      descEN: "Traditional Turkish black tea served in the iconic tulip glass.",
+      priceTL: 40, emoji: "🫖",
+      allergens: [],
+      popular: false, veggie: true
+    },
+    {
+      tr: "Türk Kahvesi", en: "Turkish Coffee",
+      descTR: "Cezve'de pişirilmiş geleneksel Türk kahvesi, lokum eşliğinde.",
+      descEN: "Traditional cezve-brewed coffee, served with Turkish delight.",
+      priceTL: 65, emoji: "☕",
+      allergens: ["Sulphites / Sülfit"],
+      popular: false, veggie: true
+    },
+    {
+      tr: "Şalgam Suyu", en: "Turnip Juice",
+      descTR: "Ekşi ve hafif acı fermente şalgam suyu, serin servis edilir.",
+      descEN: "Tangy fermented turnip juice, served chilled.",
+      priceTL: 55, emoji: "🥤",
+      allergens: [],
+      popular: false, veggie: true
+    },
+    {
+      tr: "Ev Rosé Şarap", en: "House Rosé Wine",
+      descTR: "Ege bağlarından özenle seçilmiş yerli rosé şarap (150 ml).",
+      descEN: "Carefully selected Aegean rosé wine, 150 ml glass.",
+      priceTL: 185, emoji: "🍷",
+      allergens: ["Sulphites / Sülfit", "Milk / Süt"],
+      popular: true, veggie: false
+    },
+    {
+      tr: "Maden Suyu", en: "Sparkling Water",
+      descTR: "Doğal Türk maden suyu, soğuk servis (330 ml).",
+      descEN: "Natural Turkish sparkling water, served chilled (330 ml).",
+      priceTL: 35, emoji: "💧",
+      allergens: [],
+      popular: false, veggie: true
+    }
+  ]
+};
+
+/* ── Yardımcı: fiyat formatlama ── */
+function fmtTL(p) {
+  return p.toLocaleString('tr-TR') + ' ₺';
+}
+function fmtEUR(p) {
+  return '€' + (p / EUR_RATE).toFixed(2);
+}
+
+/* ── Kart HTML üretici ── */
+function buildCard(item) {
+  const name    = isEN ? item.en    : item.tr;
+  const nameAlt = isEN ? item.tr    : item.en;
+  const desc    = isEN ? item.descEN : item.descTR;
+  const prim    = isEN ? fmtEUR(item.priceTL) : fmtTL(item.priceTL);
+  const sec     = isEN ? fmtTL(item.priceTL)  : fmtEUR(item.priceTL);
+
+  const allergenLabel = isEN ? 'Allergens' : 'Alerjenler';
+
+  let allergenHTML = '';
+  if (item.allergens.length === 0) {
+    allergenHTML = `<span class="no-allergen">${isEN ? 'No allergens' : 'Alerjen yok'}</span>`;
+  } else {
+    allergenHTML = item.allergens.map(a => {
+      /* Dil durumuna göre "Fish / Balık" → "Fish" (EN) veya "Balık" (TR) */
+      let label;
+      if (a.includes(' / ')) {
+        const parts = a.split(' / ');
+        label = isEN ? parts[0].trim() : parts[1].trim();
+      } else {
+        label = a; /* Gluten gibi evrensel olanlar */
+      }
+      return `<span class="allergen-tag">${label}</span>`;
+    }).join('');
+  }
+
+  const popularBadge = item.popular
+    ? `<span class="badge-popular">${isEN ? 'Popular' : 'Popüler'}</span>` : '';
+  const veggieBadge = item.veggie
+    ? `<span class="badge-veggie">${isEN ? 'Vegetarian' : 'Vejetaryen'}</span>` : '';
+
+  return `
+    <div class="menu-card">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">${item.emoji}</div>
+        ${popularBadge}
+        ${veggieBadge}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${name}</div>
+        <div class="card-name-alt">${nameAlt}</div>
+        <div class="card-desc">${desc}</div>
+        <div class="card-footer">
+          <div class="price-block">
+            <span class="price-primary">${prim}</span>
+            <span class="price-secondary">${sec}</span>
+          </div>
+          <div class="allergen-wrap">
+            <div class="allergen-label">${allergenLabel}</div>
+            <div class="allergen-tags">${allergenHTML}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ── Tüm grid'leri yeniden çiz ── */
+function renderAll() {
+  ['starters', 'mains', 'drinks'].forEach(cat => {
+    document.getElementById('grid-' + cat).innerHTML =
+      menu[cat].map(buildCard).join('');
+  });
+
+  /* Metinleri güncelle */
+  const TR = !isEN;
+  document.getElementById('heroEye').textContent =
+    TR ? "Antalya Körfezi'nden Sofraya" : "From the Bay of Antalya to Your Table";
+  document.getElementById('heroTag').textContent =
+    TR ? '"Denizin tuzlu nefesiyle hazırlanan lezzetler"'
+       : '"Flavours crafted with the salty breath of the sea"';
+  document.getElementById('c1').textContent = TR ? 'Başlangıçlar' : 'Starters';
+  document.getElementById('c2').textContent = TR ? 'Ana Yemekler' : 'Main Courses';
+  document.getElementById('c3').textContent = TR ? 'İçecekler'    : 'Drinks';
+  document.getElementById('st').textContent = TR ? 'Başlangıçlar' : 'Starters';
+  document.getElementById('mn').textContent = TR ? 'Ana Yemekler' : 'Main Courses';
+  document.getElementById('dr').textContent = TR ? 'İçecekler'    : 'Drinks';
+}
+
+/* ── Dil / para birimi değiştir ── */
+function toggleLang() {
+  isEN = !isEN;
+  document.getElementById('flagIcon').textContent = isEN ? '🇹🇷' : '🇬🇧';
+  document.getElementById('langLabel').textContent = isEN ? 'TR / ₺' : 'EN / €';
+  renderAll();
+}
+
+/* ── Kategori geçişi ── */
+function showCat(cat, btn) {
+  document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + cat).classList.add('visible');
+  btn.classList.add('active');
+}
+
+/* ── İlk yükleme ── */
+renderAll();
+</script>
+</body>
+</html>
